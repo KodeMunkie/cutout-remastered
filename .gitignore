@@ -1,12 +1,2 @@
-# Node
-node_modules
-npm-debug.log
-yarn-error.log
-package-lock.json
-
-# macOS system files
-.DS_Store
-
-# Test build results
-test/fixtures/*/output
-coverage
+.idea/
+node_modules/

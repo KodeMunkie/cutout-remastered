@@ -1,52 +1,41 @@
-# cutout
-
-[![build status][build-badge]][build-url]
-[![coverage status][coverage-badge]][coverage-url]
-[![greenkeeper][greenkeeper-badge]][greenkeeper-url]
-
+# Cutout Remastered
 > render a raster image to svg
 
-This library renders raster images to an svg image. It does so by repeatedly generating and mutating shapes, keeping only the best ones. The code has largely been ported from [Primitive](https://github.com/fogleman/primitive). Primitive works just fine, but I wanted something that runs in javascript to make it easier to tinker with the logic. Besides that, my goals with this library were:
+This library renders raster images to SVG images. 
+The algorithm repeatedly generates and mutates shapes, keeping only those that closely match the original bitmap. 
 
+The code has largely been ported from the [last known good fork of cutout](https://github.com/piwodlaiwo/cutout) which itself is derived from [Primitive](https://github.com/fogleman/primitive).
+
+As per original, this has
 - No native, non-javascript dependencies (so no node-canvas, as that relies on Cairo)
 - No browser specific APIs (even though it can be bundled for the browser without any problems)
 - Modular and not tied to a single implementation, so it can fit in any project
 
-## Examples
+New features
+- Replaced d3 randomNormal with a [faster random algorithm (gpick 0.0)](https://strainer.github.io/Fdrandom.js/) for shape generation that has a greater central bell curve (anecdotally better fitting in fewer iterations).
+- Fixed a race condition causing NaNs in randomNormal only seen after a 5K+ iterations caused by a bug in the original d3 randomNormal implementation.
+- Replaced missing "dainty" utility lib npm dependency with a small function to do the same thing (thanks go to [swanie21's](https://github.com/swanie21) svg info page [svg-shapes](https://github.com/swanie21/svg-shapes) for the crash course).
+- Provided a direct node runner.js to use with your own images via [Jimp](https://github.com/jimp-dev/jimp) (original requires direct ndarrays or using cutout-cli which is now unavailable).
+- Ported to ES6 and updated all the remaining dependencies.
+- Added [open licenced pexels.com](https://www.pexels.com/license/) example images. 
+- Cleaned up/modernised the code (an ongoing thing).
 
-| Raster input              | Svg result             |
-| :------------------------ | :--------------------- |
-| ![1](images/1-raster.jpg) | ![1](images/1-svg.png) |
-| ![2](images/2-raster.jpg) | ![2](images/2-svg.png) |
-| ![3](images/3-raster.jpg) | ![3](images/3-svg.png) |
-| ![4](images/4-raster.png) | ![4](images/4-svg.png) |
+Additionally, I'm considering a port to Typescript in the near future and further performance improvements using webworkers to split the variants work over multiple threads.
 
-## Installation
+## Examples with Increasing Detail
 
-```bash
-npm install -g @ismay/cutout
+| Raster input                                  | Svg result                                    |
+|:----------------------------------------------|:----------------------------------------------|
+| <img src="images/cooldude.jpg" width=500/>    | <img src="images/cooldude.svg" width=500/>    |
+| <img src="images/timessquare.jpg" width=500/> | <img src="images/timessquare.svg" width=500/> |
+| <img src="images/robot.png" width=500/>       | <img src="images/robot.svg" width=500/>       |
+
+## Example Usage from Node
+
 ```
-
-## Example
-
-```javascript
-const fs = require('fs');
-const baboon = require('baboon-image');
-const Cutout = require('@ismay/cutout');
-
-// Render the image in lines and squares
-const cutout = new Cutout(baboon, {
-  alpha: 128,
-  shapeTypes: ['Line', 'Square']
-})
-
-// Draw a 100 shapes
-for (var i = 0; i < 100; i++) {
-  cutout.step();
-}
-
-fs.writeFileSync('./baboon.svg', cutout.svg);
+node runner.js images/robot.png
 ```
+Note that this is only a quick script with hardcoded config for my own testing but felt it would be useful for others.
 
 ## API
 
@@ -110,10 +99,12 @@ Add a single new shape
 - [Primitive](https://github.com/fogleman/primitive)
 - [Primitive.js](https://github.com/ondras/primitive.js)
 - [Geometrize](https://github.com/Tw1ddle/geometrize-haxe)
+- [Ismay](https://github.com/ismay) for the original implementation.
+- [Piwodlaiwo](https://github.com/piwodlaiwo) for retaining a fork of the original. 
 
 ## License
 
-[MIT](http://ismay.mit-license.org/)
+[MIT](http://mit-license.org/)
 
 [build-badge]: https://travis-ci.org/ismay/cutout.svg?branch=master
 [build-url]: https://travis-ci.org/ismay/cutout

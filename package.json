@@ -5,62 +5,26 @@
   "author": "ismay",
   "license": "MIT",
   "main": "lib/index.js",
-  "scripts": {
-    "test": "jest",
-    "test:coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls",
-    "lint:js": "eslint '**/*.js'",
-    "lint:prettier": "prettier --list-different '**/*.js'",
-    "precommit": "lint-staged"
-  },
-  "greenkeeper": {
-    "ignore": [
-      "baboon-image",
-      "coveralls",
-      "eslint",
-      "eslint-config-airbnb-base",
-      "eslint-config-prettier",
-      "eslint-plugin-import",
-      "husky",
-      "is-svg",
-      "jest",
-      "lena",
-      "lint-staged",
-      "prettier"
-    ]
-  },
-  "publishConfig": {
-    "access": "public"
-  },
+  "type": "module",
   "jest": {
-    "testEnvironment": "node",
-    "collectCoverageFrom": [
-      "lib/**/*.js",
-      "!lib/rasterizers/**",
-      "!lib/hillclimb.js"
-    ]
+    "transform": {}
+  },
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "devDependencies": {
+    "isndarray": "^1.0.0",
     "baboon-image": "^2.1.0",
-    "coveralls": "^3.0.1",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.13.0",
-    "husky": "^0.14.3",
-    "is-svg": "^3.0.0",
-    "jest": "^23.0.1",
-    "lena": "^1.0.0",
-    "lint-staged": "^7.1.0",
-    "prettier": "^1.12.1"
+    "is-svg": "^5.0.0",
+    "jest": "^29.7.0"
   },
   "dependencies": {
     "bezier": "^0.1.0",
     "bresenham": "0.0.4",
-    "color-blend": "^1.0.3",
-    "d3-random": "^1.1.0",
-    "dainty": "^0.2.2",
-    "debug": "^3.1.0",
-    "isndarray": "^1.0.0",
+    "color-blend": "^4.0.0",
+    "fdrandom": "^3.2.0",
+    "jimp": "^0.22.12",
+    "ndarray": "^1.0.19",
     "point-in-ellipse": "^2.0.0",
     "robust-point-in-polygon": "^1.0.3",
     "zeros": "^1.0.0"
