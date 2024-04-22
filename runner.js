@@ -15,15 +15,13 @@ const options = {
   alpha: 128, // useful to smooth error
   steps: 2000
 };
-const cutout = new Cutout(asNd, options);
 
 console.info(`Using settings: ${JSON.stringify(options)}`);
 
+const cutout = new Cutout(asNd, options);
 for (var i = 0; i < options.steps; i++) {
   cutout.step(); // number of rendered shapes
 }
-const target = './output.svg';
+fs.writeFileSync(process.argv[3], cutout.svg);
 
-fs.writeFileSync(target, cutout.svg);
-
-console.info(`Written svg to ${target}`);
+console.info(`Written svg to ${process.argv[3]}`);

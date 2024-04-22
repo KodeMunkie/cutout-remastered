@@ -33,7 +33,7 @@ Additionally, I'm considering a port to Typescript in the near future and furthe
 ## Example Usage from Node
 
 ```
-node runner.js images/robot.png
+node runner.js images/robot.png ./robot.svg
 ```
 Note that this is only a quick script with hardcoded config for my own testing but felt it would be useful for others.
 
