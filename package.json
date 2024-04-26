@@ -10,16 +10,15 @@
     "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/ndarray": "^1.0.14",
     "@types/node": "^20.12.7",
-    "baboon-image": "^2.1.0",
-    "is-svg": "^5.0.0",
     "isndarray": "^1.0.0",
-    "@types/jest": "^29.5.12",
     "jest": "^29.7.0",
-    "ts-node": "^10.9.2",
     "ts-jest": "^29.1.2",
-    "typescript": "^5.4.5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "rimraf": "^5.0.5"
   },
   "dependencies": {
     "bezier": "^0.1.0",
@@ -29,7 +28,6 @@
     "jimp": "^0.22.12",
     "ndarray": "^1.0.19",
     "point-in-ellipse": "^2.0.0",
-    "rimraf": "^5.0.5",
     "robust-point-in-polygon": "^1.0.3",
     "zeros": "^1.0.0"
   }

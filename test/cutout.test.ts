@@ -1,14 +1,17 @@
 //@ts-ignore
-import baboon from 'baboon-image';
-//@ts-ignore
 import isNdarray from 'isndarray';
-//import isSvg from 'is-svg';
 import { Cutout } from '../lib/core/cutout';
 import { Options } from '../lib/config/Options';
 import { DEFAULTS } from '../lib/config/defaults';
+import Jimp from 'jimp';
+import ndarray, { NdArray } from 'ndarray';
 
-it('approximates a raster image with shapes', () => {
-  const cutout = new Cutout(baboon, {
+it('approximates a raster image with shapes', async () => {
+  let image: Jimp = await Jimp.read('./images/mandrill.png');
+  image = image.resize(500, Jimp.AUTO);
+  const ndArray: NdArray = ndarray(image.bitmap.data, [image.getWidth(), image.getHeight(), 4], [4, image.getWidth() * 4, 1], 0);
+
+  const cutout = new Cutout(ndArray, {
     ...DEFAULTS,
     amountOfShapes: 2,
     amountOfAttempts: 2
@@ -17,12 +20,16 @@ it('approximates a raster image with shapes', () => {
   cutout.step();
 
   expect(cutout.difference).toBeLessThan(start);
-  //expect(isSvg(cutout.svg)).toBe(true);
   expect(isNdarray(cutout.image)).toBe(true);
 });
 
-it('accepts a background color', () => {
-  const cutout = new Cutout(baboon, {
+it('accepts a background color', async () => {
+  let image: Jimp = await Jimp.read('./images/mandrill.png');
+  image = image.resize(500, Jimp.AUTO);
+  const ndArray: NdArray = ndarray(image.bitmap.data, [image.getWidth(), image.getHeight(), 4], [4, image.getWidth() * 4, 1], 0);
+
+
+  const cutout = new Cutout(ndArray, {
     ...DEFAULTS,
     amountOfShapes: 2,
     amountOfAttempts: 2,
@@ -32,6 +39,5 @@ it('accepts a background color', () => {
   cutout.step();
 
   expect(cutout.difference).toBeLessThan(start);
-  //expect(isSvg(cutout.svg)).toBe(true);
   expect(isNdarray(cutout.image)).toBe(true);
 });
