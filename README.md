@@ -15,7 +15,7 @@ New features
 - Replaced d3 randomNormal with a [faster random algorithm (gpick 0.0)](https://strainer.github.io/Fdrandom.js/) for shape generation that has a greater central bell curve (anecdotally better fitting in fewer iterations).
 - Fixed a race condition causing NaNs in randomNormal only seen after a 5K+ iterations caused by a bug in the original d3 randomNormal implementation.
 - Replaced missing "dainty" utility lib npm dependency with a small function to do the same thing (thanks go to [swanie21's](https://github.com/swanie21) svg info page [svg-shapes](https://github.com/swanie21/svg-shapes) for the crash course).
-- Provided a direct node runner.js to use with your own images via [Jimp](https://github.com/jimp-dev/jimp) (original requires direct ndarrays or using cutout-cli which is now unavailable).
+- Provided a direct node runner.ts to use with your own images via [Jimp](https://github.com/jimp-dev/jimp) (original requires direct ndarrays or using cutout-cli which is now unavailable).
 - Ported to ES6 and updated all the remaining dependencies.
 - Added [open licenced pexels.com](https://www.pexels.com/license/) example images. 
 - Cleaned up/modernised the code (an ongoing thing).
@@ -30,28 +30,23 @@ Additionally, I'm considering a port to Typescript in the near future and furthe
 | <img src="images/timessquare.jpg" width=500/> | <img src="images/timessquare.svg" width=500/> |
 | <img src="images/robot.png" width=500/>       | <img src="images/robot.svg" width=500/>       |
 
-## Example Usage from Node
+# Usage
+Note that this is only a quickly created script with a hardcoded config for my own testing but felt it would be useful for others to try it out before using the API.
+
+## Usage with ts-node
 
 ```
-node runner.js images/robot.png ./robot.svg
+ts-node runner.ts images/robot.png ./robot.svg
 ```
-Note that this is only a quick script with hardcoded config for my own testing but felt it would be useful for others.
+## Usage with transpile and node
+
+```
+npm run clean
+npm run build
+node ./dist/runner.js images/robot.png ./robot.svg
+```
 
 ## API
-
-### Cutout
-Render a raster image to a collection of shapes
-
-**Kind**: global class
-
-* [Cutout](#Cutout)
-    * [new Cutout(target, [options])](#new_Cutout_new)
-    * [.image](#Cutout+image) ⇒ <code>ndarray</code>
-    * [.svg](#Cutout+svg) ⇒ <code>string</code>
-    * [.difference](#Cutout+difference) ⇒ <code>number</code>
-    * [.step()](#Cutout+step) ⇒ <code>this</code>
-
-<a name="new_Cutout_new"></a>
 
 ### new Cutout(target, [options])
 

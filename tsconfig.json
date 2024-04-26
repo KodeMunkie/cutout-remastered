@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "allowJs": true,
+    "target": "ES2022",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "moduleResolution": "Node",
+    "paths": {
+    }
+  },
+  "include": ["*"],
+  "types": ["node"],
+  "hooks": [ "copy-files" ],
+  "exclude": [
+    "node_modules"
+  ]
+}

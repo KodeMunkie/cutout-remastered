@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`throws an error for colors without alpha 1`] = `"Need a color with an alpha value"`;
