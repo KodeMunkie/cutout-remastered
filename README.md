@@ -12,15 +12,15 @@ As per original, this has
 - Modular and not tied to a single implementation, so it can fit in any project
 
 New features
+- Ported to Typescript.
 - Replaced d3 randomNormal with a [faster random algorithm (gpick 0.0)](https://strainer.github.io/Fdrandom.js/) for shape generation that has a greater central bell curve (anecdotally better fitting in fewer iterations).
 - Fixed a race condition causing NaNs in randomNormal only seen after a 5K+ iterations caused by a bug in the original d3 randomNormal implementation.
 - Replaced missing "dainty" utility lib npm dependency with a small function to do the same thing (thanks go to [swanie21's](https://github.com/swanie21) svg info page [svg-shapes](https://github.com/swanie21/svg-shapes) for the crash course).
 - Provided a direct node runner.ts to use with your own images via [Jimp](https://github.com/jimp-dev/jimp) (original requires direct ndarrays or using cutout-cli which is now unavailable).
-- Ported to ES6 and updated all the remaining dependencies.
 - Added [open licenced pexels.com](https://www.pexels.com/license/) example images. 
 - Cleaned up/modernised the code (an ongoing thing).
 
-Additionally, I'm considering a port to Typescript in the near future and further performance improvements using webworkers to split the variants work over multiple threads.
+Additionally, I'm investigating further performance improvements using webworkers to split the variants work over multiple threads.
 
 ## Examples with Increasing Detail
 
