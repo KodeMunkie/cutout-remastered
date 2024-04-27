@@ -40,7 +40,7 @@ export class RotatedRect extends Shape {
 
   get svg() {
     const [x, y, width, height, angle] = this.props;
-    const shape = [
+    return [
       'rect',
       {
         x,
@@ -50,8 +50,6 @@ export class RotatedRect extends Shape {
         transform: `rotate(${angle} ${x + width / 2} ${y + height / 2})`
       }
     ];
-
-    return shape;
   }
 
   clone() {
@@ -62,7 +60,6 @@ export class RotatedRect extends Shape {
   }
 
   mutate() {
-    /* istanbul ignore next */
     switch (randomIntInclusive(0, 2)) {
       case 0:
         this.x = clampToInt(this.x + fd.vrange(0,1,0.5)  * 15, 0, this.xBound);

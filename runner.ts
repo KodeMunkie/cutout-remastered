@@ -25,7 +25,7 @@ export class Runner {
     }
     fs.writeFileSync(process.argv[3], cutout.svg);
 
-    console.info(`Writing svg to '${process.argv[3]}'`);
+    console.info(`SVG written to '${process.argv[3]}'`);
   }
 }
-new Runner().run().then(r => console.log("Done"));
+new Runner().run().then(r => {});

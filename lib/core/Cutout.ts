@@ -1,5 +1,3 @@
-//@ts-ignore
-import isNdarray from 'isndarray';
 import { NdArray } from 'ndarray';
 import { Options } from '../config/Options';
 import { toSvg } from '../export/svg';
@@ -26,10 +24,6 @@ export class Cutout {
   private score: number;
 
   constructor(public target: NdArray, public options: Options) {
-    if (!isNdarray(target)) {
-      throw new Error('Supplied image is not an ndarray');
-    }
-
     // Ensure that target has transparency
     if (!(target.shape[2] === 4)) {
       target = clone(target);

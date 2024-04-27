@@ -17,7 +17,7 @@ it('calculates scanline color', () => {
   const alpha = 255;
   const color = scanlineColor(target, current, scanlines, alpha);
 
-  expect(color).toEqual([0, 0, 0, 255]);
+  expect(color).toEqual({r:0, g:0, b:0, a:255});
 });
 
 it('calculates the full difference between two identical images', () => {

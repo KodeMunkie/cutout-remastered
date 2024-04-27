@@ -18,7 +18,6 @@ export class Rect extends Shape {
 
   constructor(xBound: number, yBound: number) {
     super(xBound, yBound);
-
     this.x = randomIntInclusive(0, xBound);
     this.y = randomIntInclusive(0, yBound);
     this.width = clampToInt(randomIntInclusive(1, 30), 1, xBound - this.x);

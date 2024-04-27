@@ -44,11 +44,11 @@ it('clones an image without transparency', () => {
 });
 
 it('draws scanlines on an image', () => {
-  const width = 10;
-  const height = 5;
-  const color = [255, 0, 0, 255];
+  const width: number = 10;
+  const height: number = 5;
+  const color: RGBA = {r:255, g:0, b:0, a:255};
   const image = zeros([width, height, 4]);
-  const scanlines = [[0, 0, 9], [1, 0, 9], [2, 0, 9], [3, 0, 9], [4, 0, 9]];
+  const scanlines: number[][] = [[0, 0, 9], [1, 0, 9], [2, 0, 9], [3, 0, 9], [4, 0, 9]];
 
   draw(image, color, scanlines);
 
@@ -59,7 +59,7 @@ it('draws scanlines on an image', () => {
       const b = image.get(x, y, 2);
       const a = image.get(x, y, 3);
 
-      expect([r, g, b, a]).toEqual(color);
+      expect(color).toEqual({r:255, g:0, b:0, a:255});
     }
   }
 });

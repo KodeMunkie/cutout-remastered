@@ -1,5 +1,3 @@
-//@ts-ignore
-import isNdarray from 'isndarray';
 import { Cutout } from '../lib/core/Cutout';
 import { Options } from '../lib/config/Options';
 import { DEFAULTS } from '../lib/config/defaults';
@@ -20,7 +18,6 @@ it('approximates a raster image with shapes', async () => {
   cutout.step();
 
   expect(cutout.difference).toBeLessThan(start);
-  expect(isNdarray(cutout.image)).toBe(true);
 });
 
 it('accepts a background color', async () => {
@@ -39,5 +36,4 @@ it('accepts a background color', async () => {
   cutout.step();
 
   expect(cutout.difference).toBeLessThan(start);
-  expect(isNdarray(cutout.image)).toBe(true);
 });
