@@ -7,8 +7,8 @@ import { clone, create, draw } from './image';
 import { backgroundColor, differenceFull, differencePartial, scanlineColor } from './compute';
 import { State } from './State';
 import { Shape } from '../shapes/Shape';
-
-
+import { ShapeColor } from '../shapes/ShapeColor';
+import { ShapeNameProps } from '../shapes/ShapeNameProps';
 
 /**
  * Render a raster image to a collection of shapes
@@ -20,7 +20,7 @@ export class Cutout {
   private readonly background: RGBA;
   private readonly current: NdArray;
   private readonly buffer: NdArray;
-  private readonly results: any[];
+  private readonly results: ShapeColor[] = [];
   private score: number;
 
   constructor(public target: NdArray, public options: Options) {
@@ -44,33 +44,33 @@ export class Cutout {
   }
 
   get svg() {
-    const shapes = this.results.map(({ shape, color }) => {
+    const shapes: ShapeNameProps[] = this.results.map(({ shape, color }) => {
       const {r, g, b, a} = color;
-      const { svg } = shape;
+      const svg: ShapeNameProps = shape.svg;
 
-      if (svg[0] === 'line' || svg[0] === 'path') {
-        svg[1].fill = 'none';
-        svg[1].stroke = `rgb(${r}, ${g}, ${b})`;
-        svg[1]['stroke-opacity'] = a / 255;
+      if (svg.name === 'line' || svg.name === 'path') {
+        svg.props.fill = 'none';
+        svg.props.stroke = `rgb(${r}, ${g}, ${b})`;
+        svg.props['stroke-opacity'] = a / 255;
       } else {
-        svg[1].stroke = 'none';
-        svg[1].fill = `rgb(${r}, ${g}, ${b})`;
-        svg[1]['fill-opacity'] = a / 255;
+        svg.props.stroke = 'none';
+        svg.props.fill = `rgb(${r}, ${g}, ${b})`;
+        svg.props['fill-opacity'] = a / 255;
       }
       return svg;
     });
 
     // Background color
-    shapes.unshift([
-      'rect',
-      {
+    shapes.unshift({
+      name: 'rect',
+      props: {
         x: 0,
         y: 0,
         width: this.width,
         height: this.height,
         fill: `rgb(${this.background.r}, ${this.background.g}, ${this.background.b})`
       }
-    ]);
+    });
     return toSvg(shapes, this.width, this.height);
   }
 
@@ -89,7 +89,6 @@ export class Cutout {
     this.addShape(state.shape, state.alpha);
   }
 
-  //@ts-ignore
   addShape(shape: Shape, alpha: number): void {
     const before: NdArray = clone(this.current);
     const scanlines: number[][] = shape.rasterize();

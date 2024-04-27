@@ -1,14 +1,8 @@
-//@ts-ignore
-import fd from 'fdrandom';
 import { clampToInt, randomIntInclusive, rotateCorner } from '../core/util';
 import { toScanlines } from '../rasterizers/polygon';
 import { Shape } from './Shape';
+import { ShapeNameProps } from './ShapeNameProps';
 
-/**
- * A rotated rectangle
- * @param {number} xBound maximum value for x-coordinates, zero-based
- * @param {number} yBound maximum value for y-coordinates, zero-based
- */
 export class RotatedRect extends Shape {
 
   private x: number;
@@ -38,39 +32,37 @@ export class RotatedRect extends Shape {
     return [this.x, this.y, this.width, this.height, this.angle];
   }
 
-  get svg() {
-    const [x, y, width, height, angle] = this.props;
-    return [
-      'rect',
-      {
-        x,
-        y,
-        width,
-        height,
-        transform: `rotate(${angle} ${x + width / 2} ${y + height / 2})`
+  get svg(): ShapeNameProps {
+    return {
+      name: 'rect',
+      props: {
+        x: this.x,
+        y: this.y,
+        width: this.width,
+        height: this.height,
+        transform: `rotate(${this.angle} ${this.x + this.width / 2} ${this.y + this.height / 2})`
       }
-    ];
+    };
   }
 
-  clone() {
-    const rectangle = new RotatedRect(this.xBound, this.yBound);
+  clone(): Shape {
+    const rectangle: RotatedRect = new RotatedRect(this.xBound, this.yBound);
     rectangle.props = this.props;
-
     return rectangle;
   }
 
-  mutate() {
+  mutate(): void {
     switch (randomIntInclusive(0, 2)) {
       case 0:
-        this.x = clampToInt(this.x + fd.vrange(0,1,0.5)  * 15, 0, this.xBound);
-        this.y = clampToInt(this.y + fd.vrange(0,1,0.5)  * 15, 0, this.yBound);
+        this.x = clampToInt(this.x + this.random(), 0, this.xBound);
+        this.y = clampToInt(this.y + this.random(), 0, this.yBound);
         break;
       case 1:
-        this.width = clampToInt(this.width + fd.vrange(0,1,0.5)  * 15, 1, this.xBound - this.x);
-        this.height = clampToInt(this.height + fd.vrange(0,1,0.5)  * 15, 1, this.yBound - this.y);
+        this.width = clampToInt(this.width + this.random(), 1, this.xBound - this.x);
+        this.height = clampToInt(this.height + this.random(), 1, this.yBound - this.y);
         break;
       case 2:
-        this.angle = (this.angle + fd.vrange(0,1,0.5)  * 30) % 180;
+        this.angle = (this.angle + this.random(30)) % 180;
     }
   }
 
@@ -90,11 +82,9 @@ export class RotatedRect extends Shape {
       [cx - width / 2, cy + height / 2]
     ];
 
-    /* istanbul ignore next */
     if (angle !== 0) {
       vertices = vertices.map(vertex => rotateCorner(vertex[0], vertex[1], cx, cy, angle));
     }
-
     return toScanlines(vertices, this.xBound, this.yBound);
   }
 }

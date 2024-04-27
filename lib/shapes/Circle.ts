@@ -1,13 +1,7 @@
-/**
- * A circle
- * @param {number} xBound maximum value for x-coordinates, zero-based
- * @param {number} yBound maximum value for y-coordinates, zero-based
- */
-//@ts-ignore
-import fd from 'fdrandom';
 import { toScanlines } from '../rasterizers/ellipse';
 import { clampToInt, randomIntInclusive } from '../core/util';
 import { Shape } from './Shape';
+import { ShapeNameProps } from './ShapeNameProps';
 
 export class Circle extends Shape {
 
@@ -32,43 +26,36 @@ export class Circle extends Shape {
     return [this.cx, this.cy, this.r];
   }
 
-  get svg() {
-    const [cx, cy, r] = this.props;
-    const shape = [
-      'circle',
+  get svg(): ShapeNameProps {
+    return {
+      name: 'circle',
+      props:
       {
-        cx,
-        cy,
-        r
+        cx: this.cx,
+        cy: this.cy,
+        r: this.r
       }
-    ];
-
-    return shape;
+    };
   }
 
-  clone() {
-    const circle = new Circle(this.xBound, this.yBound);
+  clone(): Shape {
+    const circle: Circle = new Circle(this.xBound, this.yBound);
     circle.props = this.props;
-
     return circle;
   }
 
-  mutate() {
+  mutate(): void {
     switch (randomIntInclusive(0, 1)) {
       case 0:
-        this.cx = clampToInt(this.cx + fd.vrange(0,1,0.5) * 15, 0, this.xBound);
-        this.cy = clampToInt(this.cy + fd.vrange(0,1,0.5) * 15, 0, this.yBound);
+        this.cx = clampToInt(this.cx + this.random(), 0, this.xBound);
+        this.cy = clampToInt(this.cy + this.random(), 0, this.yBound);
         break;
       case 1:
-        this.r = clampToInt(this.r + fd.vrange(0,1,0.5) * 15, 1, this.xBound);
+        this.r = clampToInt(this.r + this.random(), 1, this.xBound);
     }
   }
 
   rasterize(): number[][] {
-    const [cx, cy, rx] = this.props;
-    const ry = rx;
-    const angle = 0;
-
-    return toScanlines(cx, cy, rx, ry, angle, this.xBound, this.yBound);
+    return toScanlines(this.cx, this.cy, this.r, this.r, 0, this.xBound, this.yBound);
   }
 }

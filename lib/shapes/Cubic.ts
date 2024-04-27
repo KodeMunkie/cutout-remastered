@@ -1,14 +1,7 @@
-/**
- * A cubic bezier
- * @param {number} xBound maximum value for x-coordinates, zero-based
- * @param {number} yBound maximum value for y-coordinates, zero-based
- */
-//@ts-ignore
-import fd from 'fdrandom';
 import { toScanlines } from '../rasterizers/bezier';
 import { clampToInt, randomIntInclusive } from '../core/util';
 import { Shape } from './Shape';
-
+import { ShapeNameProps } from './ShapeNameProps';
 
 export class Cubic extends Shape {
 
@@ -48,49 +41,43 @@ export class Cubic extends Shape {
     return [this.x1, this.y1, this.x2, this.y2, this.x3, this.y3, this.x4, this.y4];
   }
 
-  get svg() {
-    const [x1, y1, x2, y2, x3, y3, x4, y4] = this.props;
-    const shape = [
-      'path',
-      {
-        d: `M${x1},${y1} C${x2},${y2} ${x3},${y3} ${x4},${y4}`
-      }
-    ];
-
-    return shape;
+  get svg(): ShapeNameProps {
+    return {
+        name: 'path',
+        props: {
+          d: `M${this.x1},${this.y1} C${this.x2},${this.y2} ${this.x3},${this.y3} ${this.x4},${this.y4}`
+        }
+    };
   }
 
-  clone() {
-    const cubic = new Cubic(this.xBound, this.yBound);
+  clone(): Shape {
+    const cubic: Cubic = new Cubic(this.xBound, this.yBound);
     cubic.props = this.props;
-
     return cubic;
   }
 
-  mutate() {
+  mutate(): void {
     switch (randomIntInclusive(0, 3)) {
       case 0:
-        this.x1 = clampToInt(this.x1 + fd.vrange(0,1,0.5) * 15, 0, this.xBound);
-        this.y1 = clampToInt(this.y1 + fd.vrange(0,1,0.5) * 15, 0, this.yBound);
+        this.x1 = clampToInt(this.x1 + this.random(), 0, this.xBound);
+        this.y1 = clampToInt(this.y1 + this.random(), 0, this.yBound);
         break;
       case 1:
-        this.x2 = clampToInt(this.x2 + fd.vrange(0,1,0.5) * 15, 0, this.xBound);
-        this.y2 = clampToInt(this.y2 + fd.vrange(0,1,0.5) * 15, 0, this.yBound);
+        this.x2 = clampToInt(this.x2 + this.random(), 0, this.xBound);
+        this.y2 = clampToInt(this.y2 + this.random(), 0, this.yBound);
         break;
       case 2:
-        this.x3 = clampToInt(this.x3 + fd.vrange(0,1,0.5) * 15, 0, this.xBound);
-        this.y3 = clampToInt(this.y3 + fd.vrange(0,1,0.5) * 15, 0, this.yBound);
+        this.x3 = clampToInt(this.x3 + this.random(), 0, this.xBound);
+        this.y3 = clampToInt(this.y3 + this.random(), 0, this.yBound);
         break;
       case 3:
-        this.x4 = clampToInt(this.x4 + fd.vrange(0,1,0.5) * 15, 0, this.xBound);
-        this.y4 = clampToInt(this.y4 + fd.vrange(0,1,0.5) * 15, 0, this.yBound);
+        this.x4 = clampToInt(this.x4 + this.random(), 0, this.xBound);
+        this.y4 = clampToInt(this.y4 + this.random(), 0, this.yBound);
     }
   }
 
-  rasterize() {
-    const [x1, y1, x2, y2, x3, y3, x4, y4] = this.props;
-    const vertices = [[x1, y1], [x2, y2], [x3, y3], [x4, y4]];
-
+  rasterize(): number[][] {
+    const vertices = [[this.x1, this.y1], [this.x2, this.y2], [this.x3, this.y3], [this.x4, this.y4]];
     return toScanlines(vertices, this.xBound, this.yBound);
   }
 }

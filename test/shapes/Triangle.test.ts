@@ -26,8 +26,8 @@ it('gets export', () => {
   const { svg } = triangle;
   const attrs = ['points'];
 
-  expect(svg[0]).toBe('polygon');
-  expect(Object.keys(svg[1])).toEqual(attrs);
+  expect(svg.name).toBe('polygon');
+  expect(Object.keys(svg.props)).toEqual(attrs);
 });
 
 it('can mutate', () => {

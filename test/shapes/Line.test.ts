@@ -26,8 +26,8 @@ it('gets export', () => {
   const { svg } = line;
   const attrs = ['x1', 'y1', 'x2', 'y2'];
 
-  expect(svg[0]).toBe('line');
-  expect(Object.keys(svg[1])).toEqual(attrs);
+  expect(svg.name).toBe('line');
+  expect(Object.keys(svg.props)).toEqual(attrs);
 });
 
 it('can mutate', () => {

@@ -26,8 +26,8 @@ it('gets export', () => {
   const { svg } = rotated;
   const attrs = ['x', 'y', 'width', 'height', 'transform'];
 
-  expect(svg[0]).toBe('rect');
-  expect(Object.keys(svg[1])).toEqual(attrs);
+  expect(svg.name).toBe('rect');
+  expect(Object.keys(svg.props)).toEqual(attrs);
 });
 
 it('can mutate', () => {

@@ -1,14 +1,8 @@
-//@ts-ignore
-import fd from 'fdrandom';
 import { clampToInt, randomIntInclusive } from '../core/util';
 import { toScanlines } from '../rasterizers/ellipse';
 import { Shape } from './Shape';
+import { ShapeNameProps } from './ShapeNameProps';
 
-/**
- * A rotated ellipse
- * @param {number} xBound maximum value for x-coordinates, zero-based
- * @param {number} yBound maximum value for y-coordinates, zero-based
- */
 export class RotatedEllipse extends Shape {
 
   private cx: number;
@@ -16,7 +10,6 @@ export class RotatedEllipse extends Shape {
   private rx: number;
   private ry: number;
   private angle: number;
-
 
   constructor(xBound: number, yBound: number) {
     super(xBound, yBound);
@@ -39,48 +32,41 @@ export class RotatedEllipse extends Shape {
     return [this.cx, this.cy, this.rx, this.ry, this.angle];
   }
 
-  get svg() {
-    const [cx, cy, rx, ry, angle] = this.props;
-    const shape = [
-      'ellipse',
-      {
-        cx,
-        cy,
-        rx,
-        ry,
-        transform: `rotate(${angle} ${cx} ${cy})`
+  get svg(): ShapeNameProps {
+    return {
+      name: 'ellipse',
+      props: {
+        cx: this.cx,
+        cy: this.cy,
+        rx: this.rx,
+        ry: this.ry,
+        transform: `rotate(${this.angle} ${this.cx} ${this.cy})`
       }
-    ];
-
-    return shape;
+    };
   }
 
-  clone() {
-    const ellipse = new RotatedEllipse(this.xBound, this.yBound);
+  clone(): Shape {
+    const ellipse: RotatedEllipse = new RotatedEllipse(this.xBound, this.yBound);
     ellipse.props = this.props;
-
     return ellipse;
   }
 
-  mutate() {
-    /* istanbul ignore next */
+  mutate(): void {
     switch (randomIntInclusive(0, 2)) {
       case 0:
-        this.cx = clampToInt(this.cx + fd.vrange(0,1,0.5) * 15, 0, this.xBound);
-        this.cy = clampToInt(this.cy + fd.vrange(0,1,0.5) * 15, 0, this.yBound);
+        this.cx = clampToInt(this.cx + this.random(), 0, this.xBound);
+        this.cy = clampToInt(this.cy + this.random(), 0, this.yBound);
         break;
       case 1:
-        this.rx = clampToInt(this.rx + fd.vrange(0,1,0.5) * 15, 1, this.xBound / 2);
-        this.ry = clampToInt(this.ry + fd.vrange(0,1,0.5) * 15, 1, this.yBound / 2);
+        this.rx = clampToInt(this.rx + this.random(), 1, this.xBound / 2);
+        this.ry = clampToInt(this.ry + this.random(), 1, this.yBound / 2);
         break;
       case 2:
-        this.angle = (this.angle + fd.vrange(0,1,0.5) * 30) % 180;
+        this.angle = (this.angle + this.random(30)) % 180;
     }
   }
 
-  rasterize() {
-    const [cx, cy, rx, ry, angle] = this.props;
-
-    return toScanlines(cx, cy, rx, ry, angle, this.xBound, this.yBound);
+  rasterize(): number[][] {
+    return toScanlines(this.cx, this.cy, this.rx, this.ry, this.angle, this.xBound, this.yBound);
   }
 }

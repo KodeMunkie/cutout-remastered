@@ -14,7 +14,6 @@ import { Shape } from './Shape';
 /**
  * Create a shape of the supplied type
  */
-
 export const create = (shapeType: string, xBound: number, yBound: number): Shape => {
   switch (shapeType.toLowerCase()) {
     case 'circle':

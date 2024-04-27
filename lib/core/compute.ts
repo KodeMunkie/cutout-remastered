@@ -117,6 +117,9 @@ export const differencePartial = (target, before, after, score, scanlines) => {
     }
   });
 
+  if (total < 0) {
+    return 0;
+  }
   return Math.sqrt(total / rgbaCount) / 255;
 };
 

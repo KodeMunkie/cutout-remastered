@@ -26,8 +26,8 @@ it('gets export', () => {
   const { svg } = circle;
   const attrs = ['cx', 'cy', 'r'];
 
-  expect(svg[0]).toBe('circle');
-  expect(Object.keys(svg[1])).toEqual(attrs);
+  expect(svg.name).toBe('circle');
+  expect(Object.keys(svg.props)).toEqual(attrs);
 });
 
 it('can mutate', () => {

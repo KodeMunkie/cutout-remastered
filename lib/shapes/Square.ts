@@ -1,13 +1,7 @@
-/**
- * A square
- * @param {number} xBound maximum value for x-coordinates, zero-based
- * @param {number} yBound maximum value for y-coordinates, zero-based
- */
-//@ts-ignore
-import fd from 'fdrandom';
 import { clampToInt, randomIntInclusive } from '../core/util';
 import { toScanlines } from '../rasterizers/rectangle';
 import { Shape } from './Shape';
+import { ShapeNameProps } from './ShapeNameProps';
 
 export class Square extends Shape {
 
@@ -32,45 +26,36 @@ export class Square extends Shape {
     return [this.x, this.y, this.size];
   }
 
-  get svg() {
-    const [x, y, size] = this.props;
-    const shape = [
-      'rect',
-      {
-        x,
-        y,
-        width: size,
-        height: size
+  get svg(): ShapeNameProps {
+    return {
+      name: 'rect',
+      props: {
+        x: this.x,
+        y: this.y,
+        width: this.size,
+        height: this.size
       }
-    ];
-
-    return shape;
+    };
   }
 
-  clone() {
-    const square = new Square(this.xBound, this.yBound);
+  clone(): Shape {
+    const square: Square = new Square(this.xBound, this.yBound);
     square.props = this.props;
-
     return square;
   }
 
-  mutate() {
-    /* istanbul ignore next */
+  mutate(): void {
     switch (randomIntInclusive(0, 1)) {
       case 0:
-        this.x = clampToInt(this.x + fd.vrange(0,1,0.5) * 15, 0, this.xBound);
-        this.y = clampToInt(this.y + fd.vrange(0,1,0.5) * 15, 0, this.yBound);
+        this.x = clampToInt(this.x + this.random(), 0, this.xBound);
+        this.y = clampToInt(this.y + this.random(), 0, this.yBound);
         break;
       case 1:
-        this.size = clampToInt(this.size + fd.vrange(0,1,0.5) * 15, 1, this.xBound - this.x);
+        this.size = clampToInt(this.size + this.random(), 1, this.xBound - this.x);
     }
   }
 
-  rasterize() {
-    const [x, y, size] = this.props;
-    const width = size;
-    const height = size;
-
-    return toScanlines(x, y, width, height, this.xBound, this.yBound);
+  rasterize(): number[][] {
+    return toScanlines(this.x, this.y, this.size, this.size, this.xBound, this.yBound);
   }
 }

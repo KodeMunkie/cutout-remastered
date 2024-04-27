@@ -26,8 +26,8 @@ it('gets export', () => {
   const { svg } = quadratic;
   const attrs = ['d'];
 
-  expect(svg[0]).toBe('path');
-  expect(Object.keys(svg[1])).toEqual(attrs);
+  expect(svg.name).toBe('path');
+  expect(Object.keys(svg.props)).toEqual(attrs);
 });
 
 it('can mutate', () => {

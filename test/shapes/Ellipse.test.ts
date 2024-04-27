@@ -26,8 +26,8 @@ it('gets export', () => {
   const { svg } = ellipse;
   const attrs = ['cx', 'cy', 'rx', 'ry'];
 
-  expect(svg[0]).toBe('ellipse');
-  expect(Object.keys(svg[1])).toEqual(attrs);
+  expect(svg.name).toBe('ellipse');
+  expect(Object.keys(svg.props)).toEqual(attrs);
 });
 
 it('can mutate', () => {
