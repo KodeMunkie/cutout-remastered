@@ -51,7 +51,7 @@ export class Cutout {
 
   get svg() {
     const shapes = this.results.map(({ shape, color }) => {
-      const [r, g, b, a] = color;
+      const {r, g, b, a} = color;
       const { svg } = shape;
 
       if (svg[0] === 'line' || svg[0] === 'path') {

@@ -1,8 +1,7 @@
 /**
  * Calculates the average color of all the pixels in an image
  */
-//@ts-ignore
-import { clampToInt } from './util'
+import { clampToInt } from './util';
 import { draw } from './image';
 import { RGBA } from 'color-blend/dist/types';
 import { NdArray } from 'ndarray';
@@ -33,12 +32,11 @@ export const backgroundColor = (image: any): RGBA => {
  * Calculates the necessary color to move current closer to target
  */
 //@ts-ignore
-export const scanlineColor = (target, current, scanlines, alpha) => {
+export const scanlineColor = (target, current, scanlines: number[][], alpha: number): RGBA => {
   const total: number[] = [0, 0, 0];
   let pixels: number = 0;
 
-  const f: number = (257 * 255) / alpha;
-  const a: number = Math.round(f);
+  const a: number = alpha+1;
 
   //@ts-ignore
   scanlines.forEach(([y, x1, x2]) => {
@@ -54,13 +52,12 @@ export const scanlineColor = (target, current, scanlines, alpha) => {
     }
   });
 
-  const color = [
-    clampToInt(Math.round(total[0] / pixels) >> 8, 0, 255),
-    clampToInt(Math.round(total[1] / pixels) >> 8, 0, 255),
-    clampToInt(Math.round(total[2] / pixels) >> 8, 0, 255),
-    alpha
-  ];
-  return color;
+  return {
+    r: clampToInt(Math.round(total[0] / pixels) >> 8, 0, 255),
+    g: clampToInt(Math.round(total[1] / pixels) >> 8, 0, 255),
+    b: clampToInt(Math.round(total[2] / pixels) >> 8, 0, 255),
+    a: alpha
+  };
 };
 
 /**
@@ -130,9 +127,8 @@ export const differencePartial = (target, before, after, score, scanlines) => {
 //@ts-ignore
 export const energy = (shape, alpha, target, current, buffer, score) => {
   const scanlines = shape.rasterize();
-  const color = scanlineColor(target, current, scanlines, alpha);
+  const color: RGBA = scanlineColor(target, current, scanlines, alpha);
 
   draw(buffer, color, scanlines);
-  const result = differencePartial(target, current, buffer, score, scanlines);
-  return result;
+  return differencePartial(target, current, buffer, score, scanlines);
 };

@@ -2,7 +2,7 @@ import ndarray, { NdArray } from 'ndarray';
 import Jimp from 'jimp';
 import * as fs from 'node:fs';
 import { Options } from './lib/config/Options';
-import { Cutout } from './lib/core/cutout';
+import { Cutout } from './lib/core/Cutout';
 import { DEFAULTS } from './lib/config/defaults';
 import process from 'process';
 
@@ -12,7 +12,7 @@ export class Runner {
     process.removeAllListeners('warning');
 
     const options: Options = DEFAULTS;
-    console.info(`\n✂️🎨 Cutout Remastered\n`);
+    console.info(`✂️🎨 Cutout Remastered\n`);
     console.info(`Using settings:\n${JSON.stringify(options)}\n`);
     console.info(`Processing '${process.argv[2]}' and writing to '${process.argv[3]}'\n`);
     let image: Jimp = await Jimp.read(process.argv[2]);

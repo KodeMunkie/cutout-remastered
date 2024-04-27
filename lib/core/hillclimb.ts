@@ -39,7 +39,6 @@ const hillClimb = (state: State, amountOfAttempts: number, lastScore: number): S
   let bestState: State = state.clone();
   let bestEnergy: number = state.energy(lastScore);
   let attempt: number = 0;
-
   for (;attempt < amountOfAttempts;) {
     const undo: State = currentState.mutate();
     const energy: number = currentState.energy(lastScore);
@@ -49,7 +48,6 @@ const hillClimb = (state: State, amountOfAttempts: number, lastScore: number): S
       attempt += 1;
       continue;
     }
-
     bestEnergy = energy;
     bestState = currentState.clone();
   }

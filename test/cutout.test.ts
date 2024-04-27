@@ -1,6 +1,6 @@
 //@ts-ignore
 import isNdarray from 'isndarray';
-import { Cutout } from '../lib/core/cutout';
+import { Cutout } from '../lib/core/Cutout';
 import { Options } from '../lib/config/Options';
 import { DEFAULTS } from '../lib/config/defaults';
 import Jimp from 'jimp';

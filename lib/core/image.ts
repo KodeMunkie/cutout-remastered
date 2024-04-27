@@ -53,18 +53,8 @@ export const clone = (image: NdArray): NdArray => {
 /**
  * Draws scanlines onto an image
  */
+export const draw = (image: NdArray, color: RGBA, scanlines: number[][]): NdArray => {
 
-//@ts-ignore
-export const draw = (image: NdArray, color, scanlines: number[][]): NdArray => {
-  // Blend module works with objects instead of arrays
-  const source: RGBA = {
-    r: color[0],
-    g: color[1],
-    b: color[2],
-    a: color[3] / 255
-  };
-
-//@ts-ignore
   scanlines.forEach(([y, x1, x2]) => {
     for (let x = x1; x < x2 + 1; x += 1) {
       const r: number = image.get(x, y, 0);
@@ -73,7 +63,7 @@ export const draw = (image: NdArray, color, scanlines: number[][]): NdArray => {
       const a: number = image.get(x, y, 3) / 255;
 
       const background = { r, g, b, a };
-      const result: RGBA = blend.normal(background, source);
+      const result: RGBA = blend.normal(background, color);
 
       image.set(x, y, 0, result.r);
       image.set(x, y, 1, result.g);
