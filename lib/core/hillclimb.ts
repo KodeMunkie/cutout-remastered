@@ -2,7 +2,7 @@
  * Gets the best state using a random algorithm
  */
 import { randomShapeOf } from '../shapes/shapes';
-import { State } from './state';
+import { State } from './State';
 import { Shape } from '../shapes/Shape';
 import { NdArray } from 'ndarray';
 import { Options } from '../config/Options';

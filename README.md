@@ -1,5 +1,5 @@
-# Cutout Remastered
-> render a raster image to svg
+# ✂ 🎨 Cutout Remastered
+> Render a raster image to SVG using primitive shapes.
 
 This library renders raster images to SVG images. 
 The algorithm repeatedly generates and mutates shapes, keeping only those that closely match the original bitmap. 

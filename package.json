@@ -1,7 +1,7 @@
 {
-  "name": "@kodemunkie/cutoutremastered",
-  "version": "0.3.1",
-  "description": "render a raster image to svg",
+  "name": "@kodemunkie/cutout-remastered",
+  "version": "1.0.0",
+  "description": "Render a raster image to svg using primitive shapes.",
   "author": "kodemunkie",
   "license": "MIT",
   "scripts": {

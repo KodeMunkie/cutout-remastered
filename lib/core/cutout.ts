@@ -7,7 +7,7 @@ import { bestHillClimbState } from './hillclimb';
 import { RGBA } from 'color-blend/dist/types';
 import { clone, create, draw } from './image';
 import { backgroundColor, differenceFull, differencePartial, scanlineColor } from './compute';
-import { State } from './state';
+import { State } from './State';
 import { Shape } from '../shapes/Shape';
 
 
