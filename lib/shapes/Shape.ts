@@ -19,5 +19,5 @@ export abstract class Shape {
 
   abstract get svg(): ShapeNameProps;
 
-  abstract get props(): any[];
+  abstract get props(): number[];
 }

@@ -3,9 +3,10 @@
  */
 import { energy } from './compute';
 import { Shape } from '../shapes/Shape';
+import { NdArray } from 'ndarray';
 
 export class State {
-  constructor(public shape: Shape, public alpha: any, public target: any, public current: any, public buffer: any, public score?: number) {
+  constructor(public shape: Shape, public alpha: number, public target: NdArray, public current: NdArray, public buffer: NdArray, public score?: number) {
     this.shape = shape;
     this.alpha = alpha;
     this.target = target;

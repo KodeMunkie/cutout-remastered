@@ -74,11 +74,11 @@ export class Cutout {
     return toSvg(shapes, this.width, this.height);
   }
 
-  get difference() {
+  get difference(): number {
     return this.score;
   }
 
-  step() {
+  step(): void {
     const state: State = bestHillClimbState(
       this.options,
       this.target,

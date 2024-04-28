@@ -7,9 +7,7 @@ import { Shape } from '../shapes/Shape';
 import { NdArray } from 'ndarray';
 import { Options } from '../config/Options';
 
-export const bestRandomState = (shapeTypes: string[], alpha: number, amountOfShapes: number, target: any, current: {
-  shape: number[];
-}, buffer: any, lastScore: number): State => {
+export const bestRandomState = (shapeTypes: string[], alpha: number, amountOfShapes: number, target: NdArray, current: NdArray, buffer: NdArray, lastScore: number): State => {
   const xBound: number = current.shape[0] - 1;
   const yBound: number = current.shape[1] - 1;
 
@@ -61,10 +59,10 @@ const hillClimb = (state: State, amountOfAttempts: number, lastScore: number): S
 
 export const bestHillClimbState = (options: Options,
   target: NdArray,
-  current: { shape: number[]; },
-  buffer: any,
+  current: NdArray,
+  buffer: NdArray,
   lastScore: number
-) => {
+): State => {
   let state: State = bestRandomState(
     options.shapeTypes,
     options.alpha,

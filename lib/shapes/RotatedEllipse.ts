@@ -28,7 +28,7 @@ export class RotatedEllipse extends Shape {
     this.angle = angle;
   }
 
-  get props() {
+  get props(): number[] {
     return [this.cx, this.cy, this.rx, this.ry, this.angle];
   }
 

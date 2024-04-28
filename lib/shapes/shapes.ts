@@ -45,5 +45,5 @@ export const create = (shapeType: string, xBound: number, yBound: number): Shape
  * Creates a random shape from the types supplied
  */
 
-export const randomShapeOf = (shapeTypes: string[], xBound: number, yBound: number) =>
+export const randomShapeOf = (shapeTypes: string[], xBound: number, yBound: number): Shape =>
   create(randomArrayItem(shapeTypes), xBound, yBound);

@@ -28,7 +28,7 @@ export class RotatedRect extends Shape {
     this.angle = angle;
   }
 
-  get props() {
+  get props(): number[] {
     return [this.x, this.y, this.width, this.height, this.angle];
   }
 
@@ -68,10 +68,10 @@ export class RotatedRect extends Shape {
 
   rasterize(): number[][] {
     const [x, y, width, height, angle] = this.props;
-    const cx = x + width / 2;
-    const cy = y + height / 2;
+    const cx: number = x + width / 2;
+    const cy: number = y + height / 2;
 
-    let vertices = [
+    let vertices: number[][] = [
       // The top-left
       [cx - width / 2, cy - height / 2],
       // The top-right

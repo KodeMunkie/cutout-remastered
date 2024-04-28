@@ -6,25 +6,22 @@ import * as line from './line';
 /**
  * Rasterizes a quadratic or cubic bezier to scanlines
  */
-//@ts-ignore
-export const toScanlines = (vertices, xBound: number, yBound: number) => {
-  //@ts-ignore
-  const xCoordinates = vertices.map(([x]) => x);
-  //@ts-ignore
-  const yCoordinates = vertices.map(([, y]) => y);
-  const samples = [];
-  const scanlines = [];
+export const toScanlines = (vertices: number[][], xBound: number, yBound: number): number[][]  => {
+  const xCoordinates: number[] = vertices.map(([x]) => x);
+  const yCoordinates: number[] = vertices.map(([, y]) => y);
+  const samples: number[][] = [];
+  const scanlines: number[][] = [];
 
   // Sample the bezier at a fixed interval
-  for (let i = 0; i < 1; i += 0.005) {
-    const x = Math.round(bezier(xCoordinates, i));
-    const y = Math.round(bezier(yCoordinates, i));
+  for (let i: number = 0; i < 1; i += 0.005) {
+    const x: number = Math.round(bezier(xCoordinates, i));
+    const y: number = Math.round(bezier(yCoordinates, i));
 
     samples.push([x, y]);
   }
 
   // Render the samples to line segments and rasterize those
-  for (let i = 0; i + 1 < samples.length; i += 1) {
+  for (let i: number = 0; i + 1 < samples.length; i += 1) {
     const [x1, y1] = samples[i];
     const [x2, y2] = samples[i + 1];
 

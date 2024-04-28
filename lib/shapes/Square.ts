@@ -22,7 +22,7 @@ export class Square extends Shape {
     this.size = size;
   }
 
-  get props() {
+  get props(): number[] {
     return [this.x, this.y, this.size];
   }
 

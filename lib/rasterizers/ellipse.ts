@@ -1,14 +1,13 @@
 /**
  * Returns the bounding box of a(n) (rotated) ellipse
  */
-import * as polygon from './polygon';
-import { rotateCorner } from '../core/util';
 //@ts-ignore
 import pointInEllipse from 'point-in-ellipse'
+import * as polygon from './polygon';
+import { rotateCorner } from '../core/util';
 
-//@ts-ignore
-export const boundingBox = (cx, cy, rx, ry, angle, xBound, yBound) => {
-  let vertices = [[cx - rx, cy - ry], [cx + rx, cy - ry], [cx - rx, cy + ry], [cx + rx, cy + ry]];
+export const boundingBox = (cx: number, cy: number, rx: number, ry: number, angle: number, xBound:  number, yBound: number) => {
+  let vertices: number[][] = [[cx - rx, cy - ry], [cx + rx, cy - ry], [cx - rx, cy + ry], [cx + rx, cy + ry]];
 
   if (angle !== 0) {
     vertices = vertices.map(([x, y]) => rotateCorner(x, y, cx, cy, angle));
@@ -20,19 +19,17 @@ export const boundingBox = (cx, cy, rx, ry, angle, xBound, yBound) => {
 /**
  * Rasterizes a(n) (rotated) ellipse to scanlines
  */
-//@ts-ignore
-export const toScanlines = (cx, cy, rx, ry, angle, xBound, yBound) => {
-  const scanlines = [];
-  const rotation = angle * (Math.PI / 180);
+export const toScanlines = (cx: number, cy: number, rx: number, ry: number, angle: number, xBound: number, yBound: number): number[][] => {
+  const scanlines: number[][] = [];
+  const rotation: number = angle * (Math.PI / 180);
   const { top, left, right, bottom } = boundingBox(cx, cy, rx, ry, angle, xBound, yBound);
 
-  for (let y = top; y < bottom + 1; y += 1) {
-    for (let x = left; x < right + 1; x += 1) {
+  for (let y: number = top; y < bottom + 1; y += 1) {
+    for (let x: number = left; x < right + 1; x += 1) {
       const inEllipse = pointInEllipse(x, y, cx, cy, rx, ry, rotation);
 
       if (inEllipse) {
         const index: number = scanlines.findIndex(scanline => scanline[0] === y);
-
         if (index < 0) {
           scanlines.push([y, x, x]);
         } else {

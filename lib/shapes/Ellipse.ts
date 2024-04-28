@@ -25,7 +25,7 @@ export class Ellipse extends Shape {
     this.ry = ry;
   }
 
-  get props() {
+  get props(): number[] {
     return [this.cx, this.cy, this.rx, this.ry];
   }
 

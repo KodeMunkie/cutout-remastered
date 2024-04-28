@@ -31,7 +31,7 @@ export class Triangle extends Shape {
     this.y3 = y3;
   }
 
-  get props() {
+  get props(): number[] {
     return [this.x1, this.y1, this.x2, this.y2, this.x3, this.y3];
   }
 

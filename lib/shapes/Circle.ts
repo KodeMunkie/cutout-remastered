@@ -22,7 +22,7 @@ export class Circle extends Shape {
     this.r = r;
   }
 
-  get props() {
+  get props(): number[] {
     return [this.cx, this.cy, this.r];
   }
 

@@ -1,13 +1,12 @@
 /**
  * Deduplicate a multidimensional array (an array of arrays)
  */
-
-export const deduplicateArrayOfArrays = (input: any[]) => {
+export const deduplicateArrayOfArrays = (input: any[]): number[][]  => {
   const cache: Set<any> = new Set();
   const output:any[] = [];
 
   for (let i: number = 0; i < input.length; i += 1) {
-    const key = input[i].join(',');
+    const key = input[i].join(','); // joining number as strings to simplify array to "list of string" effectively
 
     if (!cache.has(key)) {
       output.push(input[i]);
@@ -50,7 +49,7 @@ export const randomArrayItem = (items:string[]): string => items[Math.floor(Math
  * Returns a random integer between the min and max values, including the min and max values
  */
 
-export const randomIntInclusive = (min: number, max:  number) => {
+export const randomIntInclusive = (min: number, max:  number): number => {
   const floor: number = Math.ceil(min);
   const ceil: number = Math.floor(max);
 
@@ -61,7 +60,7 @@ export const randomIntInclusive = (min: number, max:  number) => {
  * Returns a number between the min and max values, including the min and max values
  */
 
-export const clampToInt = (number: number, min: number, max: number) => {
+export const clampToInt = (number: number, min: number, max: number): number => {
   if (number < min) {
     return Math.round(min);
   }

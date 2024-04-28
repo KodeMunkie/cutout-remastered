@@ -25,7 +25,7 @@ export class Rect extends Shape {
     this.height = height;
   }
 
-  get props() {
+  get props(): number[] {
     return [this.x, this.y, this.width, this.height];
   }
 
