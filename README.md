@@ -1,8 +1,10 @@
-# ✂ 🎨 Cutout Remastered
+# 🃏 Shapesnap 🃏
 > Render a raster image to SVG using primitive shapes.
 
-This library renders raster images to SVG images. 
+This library renders raster images to SVG images
 The algorithm repeatedly generates and mutates shapes, keeping only those that closely match the original bitmap. 
+
+Effectively it plays the card game "snap" with shapes until it finds a good match.
 
 The code has largely been ported from the [last known good fork of cutout](https://github.com/piwodlaiwo/cutout) which itself is derived from [Primitive](https://github.com/fogleman/primitive).
 
@@ -12,13 +14,13 @@ As per original, this has
 - Modular and not tied to a single implementation, so it can fit in any project
 
 New features
-- Ported to Typescript.
-- Replaced d3 randomNormal with a [faster random algorithm (gpick 0.0)](https://strainer.github.io/Fdrandom.js/) for shape generation that has a greater central bell curve (anecdotally better fitting in fewer iterations).
+- Ported to Typescript and ES6
+- Replaced d3 randomNormal with a [faster random algorithm (gteat)](https://strainer.github.io/Fdrandom.js/) for shape generation that has a greater central bell curve (anecdotally better fitting in fewer iterations).
 - Fixed a race condition causing NaNs in randomNormal only seen after a 5K+ iterations caused by a bug in the original d3 randomNormal implementation.
 - Replaced missing "dainty" utility lib npm dependency with a small function to do the same thing (thanks go to [swanie21's](https://github.com/swanie21) svg info page [svg-shapes](https://github.com/swanie21/svg-shapes) for the crash course).
-- Provided a direct node runner.ts to use with your own images via [Jimp](https://github.com/jimp-dev/jimp) (original requires direct ndarrays or using cutout-cli which is now unavailable).
+- Provided a direct runner.ts using [Jimp](https://github.com/jimp-dev/jimp) to use with your own images. (Original used direct ndarrays or the cutout-cli project which is now unavailable).
 - Added [open licenced pexels.com](https://www.pexels.com/license/) example images. 
-- Cleaned up/modernised the code (an ongoing thing).
+- Cleaned up/modernised the code (an ongoing thing),
 
 Additionally, I'm investigating further performance improvements using webworkers to split the variants work over multiple threads.
 
@@ -48,45 +50,46 @@ node ./dist/runner.js images/robot.png ./robot.svg
 
 ## API
 
-### new Cutout(target, [options])
+### new ShapeSnap(target, [options])
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| target | <code>ndarray</code> |  | The image to render to svg |
-| [options] | <code>Object</code> |  | Configuration options |
-| [options.alpha] | <code>number</code> | <code>255</code> | The opacity of the shapes (0-255) |
+| Param | Type                              | Default | Description |
+| --- |-----------------------------------| --- | --- |
+| target | <code>NdArray</code>              |  | The image to render to svg |
+| [options] | <code>Object</code>               |  | Configuration options |
+| [options.alpha] | <code>number</code>               | <code>255</code> | The opacity of the shapes (0-255) |
 | [options.background] | <code>Array.&lt;number&gt;</code> |  | Optional background color, expressed as an array of four numbers between 0 - 255 for respectively red, green, blue and transparency |
 | [options.shapeTypes] | <code>Array.&lt;string&gt;</code> |  | The types of shapes to use when generating the image, available are: `Circle`, `Cubic`, `RotatedEllipse`, `Ellipse`, `Line`, `Quadratic`, `Rect`, `RotatedRect`, `Square` and `Triangle` |
-| [options.amountOfShapes] | <code>number</code> | <code>1000</code> | The number of shapes to try per step |
-| [options.amountOfAttempts] | <code>number</code> | <code>100</code> | The number of times to mutate each candidate shape |
+| [options.amountOfShapes] | <code>number</code>               | <code>1000</code> | The number of shapes to try per step |
+| [options.amountOfAttempts] | <code>number</code>               | <code>100</code> | The number of times to mutate each candidate shape |
 
-<a name="Cutout+image"></a>
+<a name="Shapesnap+image"></a>
 
-### cutout.image ⇒ <code>ndarray</code>
+### shapesnap.image ⇒ <code>ndarray</code>
 Get the current image
 
-**Kind**: instance property of [<code>Cutout</code>](#Cutout)
+**Kind**: instance property of [<code>Shapesnap</code>](#Shapesnap)
 **Returns**: <code>ndarray</code> - The current image
-<a name="Cutout+svg"></a>
 
-### cutout.svg ⇒ <code>string</code>
+<a name="Shapesnap+svg"></a>
+
+### shapesnap.svg ⇒ <code>string</code>
 Get the current svg
 
-**Kind**: instance property of [<code>Cutout</code>](#Cutout)
+**Kind**: instance property of [<code>Shapesnap</code>](#Shapesnap)
 **Returns**: <code>string</code> - The current svg
-<a name="Cutout+difference"></a>
+<a name="Shapesnap+difference"></a>
 
-### cutout.difference ⇒ <code>number</code>
+### shapesnap.difference ⇒ <code>number</code>
 Get the current difference
 
-**Kind**: instance property of [<code>Cutout</code>](#Cutout)
+**Kind**: instance property of [<code>Shapesnap</code>](#Shapesnap)
 **Returns**: <code>number</code> - The current difference
-<a name="Cutout+step"></a>
+<a name="Shapesnap+step"></a>
 
-### cutout.step() ⇒ <code>this</code>
+### shapesnap.step() ⇒ <code>this</code>
 Add a single new shape
 
-**Kind**: instance method of [<code>Cutout</code>](#Cutout)
+**Kind**: instance method of [<code>Shapesnap</code>](#Shapesnap)
 **Returns**: <code>this</code> - The class instance
 
 ## Credits
@@ -100,10 +103,3 @@ Add a single new shape
 ## License
 
 [MIT](http://mit-license.org/)
-
-[build-badge]: https://travis-ci.org/ismay/cutout.svg?branch=master
-[build-url]: https://travis-ci.org/ismay/cutout
-[greenkeeper-badge]: https://badges.greenkeeper.io/ismay/cutout.svg
-[greenkeeper-url]: https://greenkeeper.io/
-[coverage-badge]: https://coveralls.io/repos/github/ismay/cutout/badge.svg?branch=master
-[coverage-url]: https://coveralls.io/github/ismay/cutout?branch=master

@@ -1,4 +1,4 @@
-import { Cutout } from '../lib/core/Cutout';
+import { Shapesnap } from '../lib/core/Shapesnap';
 import { Options } from '../lib/config/Options';
 import { DEFAULTS } from '../lib/config/defaults';
 import Jimp from 'jimp';
@@ -9,15 +9,15 @@ it('approximates a raster image with shapes', async (): Promise<void> => {
   image = image.resize(500, Jimp.AUTO);
   const ndArray: NdArray = ndarray(image.bitmap.data, [image.getWidth(), image.getHeight(), 4], [4, image.getWidth() * 4, 1], 0);
 
-  const cutout = new Cutout(ndArray, {
+  const shapesnap = new Shapesnap(ndArray, {
     ...DEFAULTS,
     amountOfShapes: 2,
     amountOfAttempts: 2
   } as Options);
-  const start = cutout.difference;
-  cutout.step();
+  const start = shapesnap.difference;
+  shapesnap.step();
 
-  expect(cutout.difference).toBeLessThan(start);
+  expect(shapesnap.difference).toBeLessThan(start);
 });
 
 it('accepts a background color', async (): Promise<void> => {
@@ -25,14 +25,14 @@ it('accepts a background color', async (): Promise<void> => {
   image = image.resize(500, Jimp.AUTO);
   const ndArray: NdArray = ndarray(image.bitmap.data, [image.getWidth(), image.getHeight(), 4], [4, image.getWidth() * 4, 1], 0);
 
-  const cutout: Cutout = new Cutout(ndArray, {
+  const shapesnap: Shapesnap = new Shapesnap(ndArray, {
     ...DEFAULTS,
     amountOfShapes: 2,
     amountOfAttempts: 2,
     backgroundColor: {r: 100, g: 100, b: 255, a: 255}
   } as Options);
-  const start: number = cutout.difference;
-  cutout.step();
+  const start: number = shapesnap.difference;
+  shapesnap.step();
 
-  expect(cutout.difference).toBeLessThan(start);
+  expect(shapesnap.difference).toBeLessThan(start);
 });

@@ -13,7 +13,7 @@ import { ShapeNameProps } from '../shapes/ShapeNameProps';
 /**
  * Render a raster image to a collection of shapes
  */
-export class Cutout {
+export class Shapesnap {
 
   private readonly width: number;
   private readonly height: number;
@@ -39,7 +39,7 @@ export class Cutout {
     this.results = [];
   }
 
-  get image() {
+  get image(): NdArray {
     return this.current;
   }
 
