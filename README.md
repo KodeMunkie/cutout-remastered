@@ -68,7 +68,7 @@ node ./dist/runner.js images/robot.png ./robot.svg
 Get the current image
 
 **Kind**: instance property of [<code>Shapesnap</code>](#Shapesnap)
-**Returns**: <code>ndarray</code> - The current image
+**Returns**: <code>NdArray</code> - The current image
 
 <a name="Shapesnap+svg"></a>
 
