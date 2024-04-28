@@ -52,15 +52,16 @@ node ./dist/runner.js images/robot.png ./robot.svg
 
 ### new ShapeSnap(target, [options])
 
-| Param | Type                              | Default | Description |
-| --- |-----------------------------------| --- | --- |
-| target | <code>NdArray</code>              |  | The image to render to svg |
-| [options] | <code>Object</code>               |  | Configuration options |
-| [options.alpha] | <code>number</code>               | <code>255</code> | The opacity of the shapes (0-255) |
-| [options.background] | <code>Array.&lt;number&gt;</code> |  | Optional background color, expressed as an array of four numbers between 0 - 255 for respectively red, green, blue and transparency |
-| [options.shapeTypes] | <code>Array.&lt;string&gt;</code> |  | The types of shapes to use when generating the image, available are: `Circle`, `Cubic`, `RotatedEllipse`, `Ellipse`, `Line`, `Quadratic`, `Rect`, `RotatedRect`, `Square` and `Triangle` |
-| [options.amountOfShapes] | <code>number</code>               | <code>1000</code> | The number of shapes to try per step |
-| [options.amountOfAttempts] | <code>number</code>               | <code>100</code> | The number of times to mutate each candidate shape |
+| Param | Type                              | Default           | Description                                                                                              |
+| --- |-----------------------------------|-------------------|----------------------------------------------------------------------------------------------------------|
+| target | <code>NdArray</code>              |                   | The image to render to svg                                                                               |
+| [options] | <code>Object</code>               |                   | Configuration options                                                                                    |
+| [options.alpha] | <code>number</code>               | <code>192</code>  | The opacity of the shapes (0-255)                                                                        |
+| [options.background] | <code>Array.&lt;number&gt;</code> |                   | Optional background color, expressed as an array of four numbers between 0 - 255 for respectively red, green, blue and transparency |
+| [options.shapeTypes] | <code>Array.&lt;string&gt;</code> |                   | The types of shapes to use when generating the image, available are: `Circle`, `Cubic`, `RotatedEllipse`, `Ellipse`, `Line`, `Quadratic`, `Rect`, `RotatedRect`, `Square` and `Triangle` |
+| [options.amountOfShapes] | <code>number</code>               | <code>60</code>   | The number of shapes to try per step                                                                     |
+| [options.amountOfAttempts] | <code>number</code>               | <code>4</code>    | The number of times to mutate each candidate shape                                                       |
+| [options.steps] | <code>number</code> | <code>1500</code> | The number of steps to attempt, this is directly relational to the number of final shapes in the image |
 
 <a name="Shapesnap+image"></a>
 

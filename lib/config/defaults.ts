@@ -1,7 +1,7 @@
 import { Options } from './Options';
 
 export const DEFAULTS: Options = {
-  alpha: 255,
+  alpha: 192,
   shapeTypes: [
     'Circle',
     'Cubic',
@@ -14,7 +14,7 @@ export const DEFAULTS: Options = {
     'Square',
     'Triangle'
   ],
-  amountOfShapes: 100,
-  amountOfAttempts: 10,
-  steps: 500
+  amountOfShapes: 60,
+  amountOfAttempts: 4,
+  steps: 1500
 }
