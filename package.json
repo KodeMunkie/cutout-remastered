@@ -1,12 +1,14 @@
 {
-  "name": "@kodemunkie/shapesnap",
+  "name": "shapesnap",
   "version": "1.0.0",
-  "description": "Render a raster image to svg using primitive shapes.",
+  "description": "Render a raster image to svg using primitive shapes",
   "author": "kodemunkie",
   "license": "MIT",
+  "prepare": "npm run build",
+  "prepublishOnly": "npm test",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "tsc --build tsconfig.json",
+    "build": "npm run clean && tsc --build tsconfig.json",
     "test": "jest",
     "dev": "ts-node ./runner.ts images/robot.png ./robot.svg"
   },
