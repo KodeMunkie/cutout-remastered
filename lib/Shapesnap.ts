@@ -1,14 +1,14 @@
 import { NdArray } from 'ndarray';
-import { Options } from '../config/Options';
-import { toSvg } from '../export/svg';
-import { bestHillClimbState } from './hillclimb';
+import { toSvg } from './export/svg';
+import { bestHillClimbState } from './core/hillclimb';
 import { RGBA } from 'color-blend/dist/types';
-import { clone, create, draw } from './image';
-import { backgroundColor, differenceFull, differencePartial, scanlineColor } from './compute';
-import { State } from './State';
-import { Shape } from '../shapes/Shape';
-import { ShapeColor } from '../shapes/ShapeColor';
-import { ShapeNameProps } from '../shapes/ShapeNameProps';
+import { clone, create, draw } from './core/image';
+import { backgroundColor, differenceFull, differencePartial, scanlineColor } from './core/compute';
+import { State } from './core/State';
+import { Shape } from './shapes/Shape';
+import { ShapeColor } from './shapes/ShapeColor';
+import { ShapeNameProps } from './shapes/ShapeNameProps';
+import { Options } from './config/Options';
 
 /**
  * Render a raster image to a collection of shapes

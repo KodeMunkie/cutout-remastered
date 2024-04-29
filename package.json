@@ -1,6 +1,6 @@
 {
   "name": "shapesnap",
-  "version": "1.0.1",
+  "version": "1.0.5",
   "description": "Transform images to SVG using primitive shapes",
   "author": "kodemunkie",
   "license": "MIT",

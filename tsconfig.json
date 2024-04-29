@@ -3,7 +3,8 @@
     "module": "ES6",
     "allowJs": true,
     "target": "ES6",
-    "outDir": "./dist",
+    "outDir": "dist",
+    "declaration": true,
     "strict": true,
     "esModuleInterop": true,
     "sourceMap": true,
@@ -11,10 +12,8 @@
     "paths": {
     }
   },
-  "include": ["./runner.ts", "lib/**/*"],
+  "include": ["lib"],
+  "exclude": ["node_modules", "dist", "rollup.config.js"],
   "types": ["node"],
-  "hooks": [ "copy-files" ],
-  "exclude": [
-    "node_modules"
-  ]
+  "hooks": [ "copy-files" ]
 }
