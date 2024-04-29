@@ -1,7 +1,7 @@
 {
   "name": "shapesnap",
   "version": "1.0.0",
-  "description": "Transform images to SVGs using primitive shapes",
+  "description": "Transform images to SVG using primitive shapes",
   "author": "kodemunkie",
   "license": "MIT",
   "prepare": "npm run build",
