@@ -1,4 +1,4 @@
-import { Shapesnap } from '../lib/core/Shapesnap';
+import { Shapesnap } from '../lib/Shapesnap';
 import { Options } from '../lib/config/Options';
 import { DEFAULTS } from '../lib/config/defaults';
 import Jimp from 'jimp';
