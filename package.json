@@ -1,14 +1,28 @@
 {
   "name": "shapesnap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Transform images to SVG using primitive shapes",
   "author": "kodemunkie",
   "license": "MIT",
+  "main": "dist/index.js",
   "prepare": "npm run build",
   "prepublishOnly": "npm test",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KodeMunkie/shapesnap.git"
+  },
+  "keywords": [
+    "art",
+    "svg",
+    "shapes",
+    "image-processing",
+    "rasterizer",
+    "primitive",
+    "vectorization"
+  ],
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && tsc --build tsconfig.json",
+    "build": "npm run clean && rollup -c",
     "test": "jest",
     "dev": "ts-node ./runner.ts images/robot.png ./robot.svg"
   },
@@ -31,6 +45,8 @@
     "ndarray": "^1.0.19",
     "point-in-ellipse": "^2.0.0",
     "robust-point-in-polygon": "^1.0.3",
+    "rollup": "^4.17.1",
+    "rollup-plugin-typescript2": "^0.36.0",
     "ts-stopwatch": "^0.0.4",
     "zeros": "^1.0.0"
   }
