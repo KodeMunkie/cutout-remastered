@@ -2,7 +2,7 @@ import ndarray, { NdArray } from 'ndarray';
 import Jimp from 'jimp';
 import * as fs from 'node:fs';
 import { Options } from './lib/config/Options';
-import { Shapesnap } from './lib/core/Shapesnap';
+import { Shapesnap } from './lib/Shapesnap';
 import { DEFAULTS } from './lib/config/defaults';
 import { Stopwatch } from "ts-stopwatch";
 import process from 'process';
