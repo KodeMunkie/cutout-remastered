@@ -1,5 +1,5 @@
 # 🃏 Shapesnap 🃏
-> Render a raster image to SVG using primitive shapes.
+> Transform images to SVG using primitive shapes.
 
 This library renders raster images to SVG images
 The algorithm repeatedly generates and mutates shapes, keeping only those that closely match the original bitmap. 

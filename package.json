@@ -1,7 +1,7 @@
 {
   "name": "shapesnap",
   "version": "1.0.0",
-  "description": "Render a raster image to svg using primitive shapes",
+  "description": "Transform images to SVGs using primitive shapes",
   "author": "kodemunkie",
   "license": "MIT",
   "prepare": "npm run build",
