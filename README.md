@@ -83,7 +83,7 @@ Get the current difference
 ### shapesnap.step() ⇒ <code>void</code>
 Add a single new shape
 
-### shapesnap.autostep( [callback: (progress:String) => {}] ) ⇒ <code>void</code>
+### shapesnap.autostep( [callback: (progress:String) => void] ) ⇒ <code>void</code>
 Adds the option.steps number of steps with each 10% progression passed to the (optional) callback.
 If no callback is specified it outputs to the console.
 

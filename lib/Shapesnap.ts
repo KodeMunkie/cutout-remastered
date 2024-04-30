@@ -94,15 +94,15 @@ export class Shapesnap {
     this.addShape(state.shape, state.alpha);
   }
 
-  autoStep(callback: (progress: string) => {} = (progress) => process.stdout.write(progress)): void {
+  autoStep(callback: (progress: string) => void = (progress: string) => process.stdout.write(`\r\x1b[KProgress: ${progress}%`)): void {
     const tenPercent: number = this.options.steps/10;
     for (let i = 0; i < this.options.steps; i++) {
       if (i % Math.round(tenPercent) == 0) {
-        callback(`\r\x1b[KProgress: ${(i/this.options.steps)*100}%`);
+        callback(`${(i/this.options.steps)*100}`);
       }
       this.step(); // number of rendered shapes
     }
-    callback(`\r\x1b[KProgress: 100%\n\n`);
+    callback(`100`);
   }
 
   addShape(shape: Shape, alpha: number): void {
