@@ -35,15 +35,15 @@ Additionally, I'm investigating further performance improvements using webworker
 # Usage
 Note that this is only a quickly created script with a hardcoded config for my own testing but felt it would be useful for others to try it out before using the API.
 
-## Usage with ts-node
+## Usage with tsx installed globally
 
 ```
-ts-node runner.ts images/robot.png ./robot.svg
+npm install -g tsx
+tsx runner.ts images/robot.png ./robot.svg
 ```
 ## Usage with transpile and node
 
 ```
-npm run clean
 npm run build
 node ./dist/runner.js images/robot.png ./robot.svg
 ```
