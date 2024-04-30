@@ -50,7 +50,7 @@ node ./dist/runner.js images/robot.png ./robot.svg
 
 ## API
 
-### new ShapeSnap(target, [options])
+### new ShapeSnap( target, [options] )
 
 | Param | Type                              | Default           | Description                                                                                              |
 | --- |-----------------------------------|-------------------|----------------------------------------------------------------------------------------------------------|
@@ -64,34 +64,28 @@ node ./dist/runner.js images/robot.png ./robot.svg
 | [options.steps] | <code>number</code> | <code>1500</code> | The number of steps to attempt, this is directly relational to the number of final shapes in the image |
 
 <a name="Shapesnap+image"></a>
-
-### shapesnap.image ⇒ <code>ndarray</code>
+### shapesnap.image ⇒ <code>NdArray</code>
 Get the current image
 
-**Kind**: instance property of [<code>Shapesnap</code>](#Shapesnap)
-**Returns**: <code>NdArray</code> - The current image
-
 <a name="Shapesnap+svg"></a>
-
 ### shapesnap.svg ⇒ <code>string</code>
 Get the current svg
 
-**Kind**: instance property of [<code>Shapesnap</code>](#Shapesnap)
-**Returns**: <code>string</code> - The current svg
-<a name="Shapesnap+difference"></a>
+<a name="Shapesnap+svg"></a>
+### shapesnap.shapes ⇒ <code>ShapeColor[]</code>
+Get the current internal model of shapes
 
+<a name="Shapesnap+difference"></a>
 ### shapesnap.difference ⇒ <code>number</code>
 Get the current difference
 
-**Kind**: instance property of [<code>Shapesnap</code>](#Shapesnap)
-**Returns**: <code>number</code> - The current difference
 <a name="Shapesnap+step"></a>
-
-### shapesnap.step() ⇒ <code>this</code>
+### shapesnap.step() ⇒ <code>void</code>
 Add a single new shape
 
-**Kind**: instance method of [<code>Shapesnap</code>](#Shapesnap)
-**Returns**: <code>this</code> - The class instance
+### shapesnap.autostep( [callback: (progress:String) => {}] ) ⇒ <code>void</code>
+Adds the option.steps number of steps with each 10% progression passed to the (optional) callback.
+If no callback is specified it outputs to the console.
 
 ## Credits
 

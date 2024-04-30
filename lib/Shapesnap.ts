@@ -9,6 +9,7 @@ import { Shape } from './shapes/Shape';
 import { ShapeColor } from './shapes/ShapeColor';
 import { ShapeNameProps } from './shapes/ShapeNameProps';
 import { Options } from './config/Options';
+import process from 'process';
 
 /**
  * Render a raster image to a collection of shapes
@@ -20,13 +21,13 @@ export class Shapesnap {
   private readonly background: RGBA;
   private readonly current: NdArray;
   private readonly buffer: NdArray;
-  private readonly results: ShapeColor[] = [];
+  private readonly results: ShapeColor[];
   private score: number;
 
   constructor(public target: NdArray, public options: Options) {
     // Ensure that target has transparency
     if (!(target.shape[2] === 4)) {
-      target = clone(target);
+      this.target = clone(target);
     }
 
     // Calculate background color if it wasn't supplied
@@ -41,6 +42,10 @@ export class Shapesnap {
 
   get image(): NdArray {
     return this.current;
+  }
+
+  get shapes(): ShapeColor[] {
+    return this.results;
   }
 
   get svg() {
@@ -87,6 +92,17 @@ export class Shapesnap {
       this.score
     )!;
     this.addShape(state.shape, state.alpha);
+  }
+
+  autoStep(callback: (progress: string) => {} = (progress) => process.stdout.write(progress)): void {
+    const tenPercent: number = this.options.steps/10;
+    for (let i = 0; i < this.options.steps; i++) {
+      if (i % Math.round(tenPercent) == 0) {
+        callback(`\r\x1b[KProgress: ${(i/this.options.steps)*100}%`);
+      }
+      this.step(); // number of rendered shapes
+    }
+    callback(`\r\x1b[KProgress: 100%\n\n`);
   }
 
   addShape(shape: Shape, alpha: number): void {
