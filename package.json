@@ -23,7 +23,7 @@
     "clean": "rimraf dist",
     "build": "npm run clean && rollup -c",
     "test": "jest",
-    "dev": "ts-node ./runner.ts images/robot.png ./robot.svg"
+    "dev": "tsx ./runner.ts images/robot.png ./robot.svg"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",

@@ -1,5 +1,6 @@
 import ndarray, { NdArray } from 'ndarray';
-import Jimp from 'jimp';
+//@ts-ignore
+import Jimp from 'jimp/es';
 import * as fs from 'node:fs';
 import { Options } from './lib/config/Options';
 import { Shapesnap } from './lib/Shapesnap';

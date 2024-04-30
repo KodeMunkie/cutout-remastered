@@ -9,8 +9,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "moduleResolution": "Node",
-    "paths": {
-    }
+    "allowSyntheticDefaultImports": true
   },
   "include": ["lib"],
   "exclude": ["node_modules", "dist", "rollup.config.js"],
