@@ -16,7 +16,7 @@ export class Runner {
     const options: Options = {
       ...DEFAULTS,
     }
-    console.info(`🃏 Shapesnape 🃏\n`);
+    console.info(`🃏 Shapesnap 🃏\n`);
     console.info(`Using settings:\n${JSON.stringify(options)}\n`);
     console.info(`Processing '${process.argv[2]}' and writing to '${process.argv[3]}'`);
     let image: Jimp = await Jimp.read(process.argv[2]);
