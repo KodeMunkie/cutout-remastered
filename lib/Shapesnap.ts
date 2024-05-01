@@ -16,6 +16,14 @@ import process from 'process';
  */
 export class Shapesnap {
 
+  private readonly log = (progress: string): void => {
+    if (process.stdout) {
+      process.stdout.write(`\r\x1b[KProgress: ${progress}%`)
+    } else {
+      console.info(`Progress: ${progress}%`)
+    }
+  }
+
   private readonly width: number;
   private readonly height: number;
   private readonly background: RGBA;
@@ -95,7 +103,7 @@ export class Shapesnap {
     return this;
   }
 
-  autoStep(callback: (progress: string) => void = (progress: string) => process.stdout.write(`\r\x1b[KProgress: ${progress}%`)): Shapesnap {
+  autoStep(callback: (progress: string) => void = (progress: string) => this.log(progress)): Shapesnap {
     const tenPercent: number = this.options.steps/10;
     for (let i = 0; i < this.options.steps; i++) {
       if (i % Math.round(tenPercent) == 0) {
