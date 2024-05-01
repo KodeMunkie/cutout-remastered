@@ -24,11 +24,9 @@ export class Runner {
     const ndArray: NdArray = ndarray(image.bitmap.data, [image.getWidth(), image.getHeight(), 4], [4, image.getWidth() * 4, 1], 0);
     const stopwatch = new Stopwatch();
     stopwatch.start();
-    const shapesnap = new Shapesnap(ndArray, options);
-    shapesnap.autoStep();
-    fs.writeFileSync(process.argv[3], shapesnap.svg);
+    fs.writeFileSync(process.argv[3], new Shapesnap(ndArray, options).autoStep().svg);
     const timeTaken: number = stopwatch.stop();
-    console.info(`SVG written to '${process.argv[3]}'`);
+    console.info(`\nSVG written to '${process.argv[3]}'`);
     console.info(`Finished in ${timeTaken/1000} seconds`);
   }
 }

@@ -48,9 +48,28 @@ npm run build
 node ./dist/runner.js images/robot.png ./robot.svg
 ```
 
-## API
+# API
 
+## Usage
+
+Auto stepping with [options.steps]
+```javascript
+return new ShapeSnap( target, [options] ).autostep().svg
+```
+
+Within a for loop
+```javascript
+for (let i = 0; i < steps; i++) {
+    shapesnap.step(); // number of rendered shapes
+}
+return shapesnap.svg;
+```
+
+
+## Constructor
 ### new ShapeSnap( target, [options] )
+
+## Options
 
 | Param | Type                              | Default           | Description                                                                                              |
 | --- |-----------------------------------|-------------------|----------------------------------------------------------------------------------------------------------|
@@ -80,10 +99,10 @@ Get the current internal model of shapes
 Get the current difference
 
 <a name="Shapesnap+step"></a>
-### shapesnap.step() ⇒ <code>void</code>
+### shapesnap.step() ⇒ <code>Shapesnap</code>
 Add a single new shape
 
-### shapesnap.autostep( [callback: (progress:String) => void] ) ⇒ <code>void</code>
+### shapesnap.autostep( [callback: (progress:String) => void] ) ⇒ <code>Shapesnap</code>
 Adds the option.steps number of steps with each 10% progression passed to the (optional) callback.
 If no callback is specified it outputs to the console.
 

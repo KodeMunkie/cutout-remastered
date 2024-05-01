@@ -83,7 +83,7 @@ export class Shapesnap {
     return this.score;
   }
 
-  step(): void {
+  step(): Shapesnap {
     const state: State = bestHillClimbState(
       this.options,
       this.target,
@@ -92,9 +92,10 @@ export class Shapesnap {
       this.score
     )!;
     this.addShape(state.shape, state.alpha);
+    return this;
   }
 
-  autoStep(callback: (progress: string) => void = (progress: string) => process.stdout.write(`\r\x1b[KProgress: ${progress}%`)): void {
+  autoStep(callback: (progress: string) => void = (progress: string) => process.stdout.write(`\r\x1b[KProgress: ${progress}%`)): Shapesnap {
     const tenPercent: number = this.options.steps/10;
     for (let i = 0; i < this.options.steps; i++) {
       if (i % Math.round(tenPercent) == 0) {
@@ -103,12 +104,13 @@ export class Shapesnap {
       this.step(); // number of rendered shapes
     }
     callback(`100`);
+    return this;
   }
 
   addShape(shape: Shape, alpha: number): void {
     const before: NdArray = clone(this.current);
     const scanlines: number[][] = shape.rasterize();
-    const color = scanlineColor(this.target, this.current, scanlines, alpha);
+    const color: RGBA = scanlineColor(this.target, this.current, scanlines, alpha);
 
     draw(this.current, color, scanlines);
 
