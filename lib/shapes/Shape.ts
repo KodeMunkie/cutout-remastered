@@ -6,7 +6,7 @@ export abstract class Shape {
 
   static MAX_SIZE: number;
 
-  protected random(min: number = 0, max: number = 15): number {
+  protected random(min: number = 0, max: number = Shape.MAX_SIZE): number {
     //return fd.vrange(min, max,0.5);
     //return fd.gpick(min, max, 0.25);
     return fd.gteat(min, max);
