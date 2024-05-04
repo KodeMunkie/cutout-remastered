@@ -7,4 +7,5 @@ export interface Options {
   amountOfShapes: number;
   amountOfAttempts: number;
   steps: number;
+  maxSize: number;
 }

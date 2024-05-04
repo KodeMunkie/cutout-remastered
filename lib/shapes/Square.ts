@@ -13,7 +13,7 @@ export class Square extends Shape {
     super(xBound, yBound);
     this.x = randomIntInclusive(0, xBound);
     this.y = randomIntInclusive(0, yBound);
-    this.size = clampToInt(randomIntInclusive(1, 30), 1, xBound - this.x);
+    this.size = clampToInt(randomIntInclusive(1, Square.MAX_SIZE*2), 1, xBound - this.x);
   }
 
   set props([x, y, size]) {

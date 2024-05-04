@@ -14,8 +14,8 @@ export class Ellipse extends Shape {
     super(xBound, yBound);
     this.cx = randomIntInclusive(0, xBound);
     this.cy = randomIntInclusive(0, yBound);
-    this.rx = randomIntInclusive(1, 30);
-    this.ry = randomIntInclusive(1, 30);
+    this.rx = randomIntInclusive(1, Ellipse.MAX_SIZE);
+    this.ry = randomIntInclusive(1, Ellipse.MAX_SIZE);
   }
 
   set props([cx, cy, rx, ry]) {

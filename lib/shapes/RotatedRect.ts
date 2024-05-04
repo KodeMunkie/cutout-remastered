@@ -15,8 +15,8 @@ export class RotatedRect extends Shape {
     super(xBound, yBound);
     this.x = randomIntInclusive(0, xBound);
     this.y = randomIntInclusive(0, yBound);
-    this.width = clampToInt(randomIntInclusive(1, 30), 1, xBound - this.x);
-    this.height = clampToInt(randomIntInclusive(1, 30), 1, yBound - this.y);
+    this.width = clampToInt(randomIntInclusive(1, RotatedRect.MAX_SIZE*2), 1, xBound - this.x);
+    this.height = clampToInt(randomIntInclusive(1, RotatedRect.MAX_SIZE*2), 1, yBound - this.y);
     this.angle = randomIntInclusive(0, 179);
   }
 

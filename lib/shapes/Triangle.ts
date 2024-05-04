@@ -16,10 +16,10 @@ export class Triangle extends Shape {
     super(xBound, yBound);
     this.x1 = randomIntInclusive(0, xBound);
     this.y1 = randomIntInclusive(0, yBound);
-    this.x2 = this.x1 + randomIntInclusive(-15, 15);
-    this.y2 = this.y1 + randomIntInclusive(-15, 15);
-    this.x3 = this.x1 + randomIntInclusive(-15, 15);
-    this.y3 = this.y1 + randomIntInclusive(-15, 15);
+    this.x2 = this.x1 + randomIntInclusive(-Triangle.MAX_SIZE, Triangle.MAX_SIZE);
+    this.y2 = this.y1 + randomIntInclusive(-Triangle.MAX_SIZE, Triangle.MAX_SIZE);
+    this.x3 = this.x1 + randomIntInclusive(-Triangle.MAX_SIZE, Triangle.MAX_SIZE);
+    this.y3 = this.y1 + randomIntInclusive(-Triangle.MAX_SIZE, Triangle.MAX_SIZE);
   }
 
   set props([x1, y1, x2, y2, x3, y3]) {

@@ -10,6 +10,8 @@ import { ShapeColor } from './shapes/ShapeColor';
 import { ShapeNameProps } from './shapes/ShapeNameProps';
 import { Options } from './config/Options';
 import process from 'process';
+import { sanitizeOptions } from './config/optionsSanitizer';
+import { DEFAULTS } from './config/defaults';
 
 /**
  * Render a raster image to a collection of shapes
@@ -32,20 +34,24 @@ export class Shapesnap {
   private readonly results: ShapeColor[];
   private score: number;
 
-  constructor(public target: NdArray, public options: Options) {
+  constructor(public target: NdArray, public options?: Options) {
     // Ensure that target has transparency
     if (!(target.shape[2] === 4)) {
       this.target = clone(target);
     }
 
+    // Sanitize the options and set defaults if bad
+    this.options = sanitizeOptions(DEFAULTS, options);
+
     // Calculate background color if it wasn't supplied
-    this.background = options.backgroundColor || backgroundColor(target);
+    this.background = this.options.backgroundColor || backgroundColor(target);
     this.width = target.shape[0];
     this.height = target.shape[1];
     this.current = create(this.width, this.height, this.background);
     this.buffer = create(this.width, this.height, this.background);
     this.score = differenceFull(target, this.current);
     this.results = [];
+    Shape.MAX_SIZE = this.options.maxSize;
   }
 
   get image(): NdArray {
@@ -93,7 +99,7 @@ export class Shapesnap {
 
   step(): Shapesnap {
     const state: State = bestHillClimbState(
-      this.options,
+      this.options!,
       this.target,
       this.current,
       this.buffer,
@@ -104,10 +110,10 @@ export class Shapesnap {
   }
 
   autoStep(callback: (progress: string) => void = (progress: string) => this.log(progress)): Shapesnap {
-    const tenPercent: number = this.options.steps/10;
-    for (let i = 0; i < this.options.steps; i++) {
+    const tenPercent: number = this.options!.steps/10;
+    for (let i = 0; i < this.options!.steps; i++) {
       if (i % Math.round(tenPercent) == 0) {
-        callback(`${(i/this.options.steps)*100}`);
+        callback(`${(i/this.options!.steps)*100}`);
       }
       this.step(); // number of rendered shapes
     }

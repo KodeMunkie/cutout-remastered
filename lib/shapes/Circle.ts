@@ -13,7 +13,7 @@ export class Circle extends Shape {
     super(xBound, yBound);
     this.cx = randomIntInclusive(0, xBound);
     this.cy = randomIntInclusive(0, yBound);
-    this.r = randomIntInclusive(1, 30);
+    this.r = randomIntInclusive(1, Circle.MAX_SIZE);
   }
 
   set props([cx, cy, r]) {

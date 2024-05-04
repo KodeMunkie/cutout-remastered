@@ -15,8 +15,8 @@ export class RotatedEllipse extends Shape {
     super(xBound, yBound);
     this.cx = randomIntInclusive(0, xBound);
     this.cy = randomIntInclusive(0, yBound);
-    this.rx = randomIntInclusive(1, 30);
-    this.ry = randomIntInclusive(1, 30);
+    this.rx = randomIntInclusive(1, RotatedEllipse.MAX_SIZE);
+    this.ry = randomIntInclusive(1, RotatedEllipse.MAX_SIZE);
     this.angle = randomIntInclusive(0, 179);
   }
 

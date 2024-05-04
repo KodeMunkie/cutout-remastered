@@ -14,8 +14,8 @@ export class Line extends Shape {
     super(xBound, yBound);
     this.x1 = randomIntInclusive(0, xBound);
     this.y1 = randomIntInclusive(0, yBound);
-    this.x2 = this.x1 + randomIntInclusive(-15, 15);
-    this.y2 = this.y1 + randomIntInclusive(-15, 15);
+    this.x2 = this.x1 + randomIntInclusive(-Line.MAX_SIZE, Line.MAX_SIZE);
+    this.y2 = this.y1 + randomIntInclusive(-Line.MAX_SIZE, Line.MAX_SIZE);
   }
 
   set props([x1, y1, x2, y2]) {
