@@ -56,13 +56,13 @@ export const clone = (image: NdArray): NdArray => {
 export const draw = (image: NdArray, color: RGBA, scanlines: number[][]): NdArray => {
 
   scanlines.forEach(([y, x1, x2]) => {
-    for (let x = x1; x < x2 + 1; x += 1) {
+    for (let x: number = x1; x < x2 + 1; x += 1) {
       const r: number = image.get(x, y, 0);
       const g: number = image.get(x, y, 1);
       const b: number = image.get(x, y, 2);
       const a: number = image.get(x, y, 3) / 255;
 
-      const background = { r, g, b, a };
+      const background: RGBA = { r, g, b, a };
       const result: RGBA = blend.normal(background, color);
 
       image.set(x, y, 0, result.r);

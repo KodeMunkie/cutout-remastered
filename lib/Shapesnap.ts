@@ -62,7 +62,7 @@ export class Shapesnap {
     return this.results;
   }
 
-  get svg() {
+  get svg(): string {
     const shapes: ShapeNameProps[] = this.results.map(({ shape, color }) => {
       const {r, g, b, a} = color;
       const svg: ShapeNameProps = shape.svg;
